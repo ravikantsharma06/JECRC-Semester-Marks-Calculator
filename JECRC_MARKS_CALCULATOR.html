@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JECRC Semester Marks Calculator | SGPA & Percentage Calculator</title>
+
+<meta name="description" content="Free JECRC Semester Marks Calculator. Calculate your internal marks, end semester marks, total marks and percentage easily for theoretical and practical subjects.">
+
+<meta name="keywords" content="JECRC Marks Calculator, Semester Marks Calculator, College Marks Calculator, SGPA Calculator, Percentage Calculator">
+
+<meta name="author" content="Ravikant Sharma">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ravikantsharma06.github.io/marks-calculator/">
+
+<!-- Open Graph (Social Sharing) -->
+
+<meta property="og:title" content="JECRC Semester Marks Calculator">
+<meta property="og:description" content="Calculate your semester marks and percentage instantly.">
+<meta property="og:type" content="website">
+
+<!-- Schema Markup -->
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "JECRC Semester Marks Calculator",
+ "url": "https://ravikantsharma06.github.io/",
+ "applicationCategory": "EducationalApplication",
+ "creator": {
+   "@type": "Person",
+   "name": "Ravikant Sharma"
+ }
+}
+</script>
+
+<style>
+
+body{
+font-family: Arial;
+text-align:center;
+background:#f5f5f5;
+margin:0;
+}
+
+header{
+background:#037c17;
+color:white;
+padding:20px;
+}
+
+table{
+border-collapse: collapse;
+margin:auto;
+background:white;
+margin-bottom:30px;
+width:90%;
+max-width:900px;
+}
+
+th,td{
+border:1px solid black;
+padding:8px;
+}
+
+input{
+width:60px;
+text-align:center;
+}
+
+.result{
+background:#e8f5e9;
+font-weight:bold;
+}
+
+footer{
+background:#000000;
+color:white;
+padding:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>JECRC Semester Marks Calculator</h1>
+<p>Calculate your theoretical and practical subject marks easily.</p>
+</header>
+
+<h2>Theoretical Subjects</h2>
+
+<table>
+
+<tr>
+<th>Subject</th>
+<th>1st InSem (40)</th>
+<th>2nd InSem (40)</th>
+<th>Assignment (20)</th>
+<th>End Sem (100)</th>
+<th>Total (Out of 100)</th>
+</tr>
+
+<script>
+
+for(let i=1;i<=7;i++){
+
+document.write(`
+<tr>
+<td>Theory ${i}</td>
+
+<td><input type="number" id="b${i}" oninput="calculate()"></td>
+
+<td><input type="number" id="c${i}" oninput="calculate()"></td>
+
+<td><input type="number" id="d${i}" oninput="calculate()"></td>
+
+<td><input type="number" id="e${i}" oninput="calculate()"></td>
+
+<td class="result" id="f${i}"></td>
+
+</tr>
+`);
+
+}
+
+</script>
+
+</table>
+
+<h2>Practical Subjects</h2>
+
+<table>
+
+<tr>
+<th>Subject</th>
+<th>End Sem (100)</th>
+<th>Total</th>
+</tr>
+
+<script>
+
+for(let i=8;i<=14;i++){
+
+document.write(`
+<tr>
+<td>Practical ${i-7}</td>
+
+<td><input type="number" id="pe${i}" oninput="calculate()"></td>
+
+<td class="result" id="pf${i}"></td>
+
+</tr>
+`);
+
+}
+
+</script>
+
+<tr>
+<td colspan="2"><b>Total Marks</b></td>
+<td id="total"></td>
+</tr>
+
+<tr>
+<td colspan="2"><b>Percentage</b></td>
+<td id="percent"></td>
+</tr>
+
+</table>
+
+<script>
+
+function calculate(){
+
+let total = 0;
+let subjectsEntered = 0;
+
+/* THEORY */
+
+for(let i=1;i<=7;i++){
+
+let b = Number(document.getElementById("b"+i).value) || 0;
+let c = Number(document.getElementById("c"+i).value) || 0;
+let d = Number(document.getElementById("d"+i).value) || 0;
+let e = Number(document.getElementById("e"+i).value) || 0;
+
+if(b || c || d || e){
+subjectsEntered++;
+}
+
+let f = ((b+c)*0.375) + d + (e/2);
+
+document.getElementById("f"+i).innerHTML = f.toFixed(2);
+
+total += f;
+
+}
+
+/* PRACTICAL */
+
+for(let i=8;i<=14;i++){
+
+let e = Number(document.getElementById("pe"+i).value) || 0;
+
+if(e){
+subjectsEntered++;
+}
+
+let f = e;
+
+document.getElementById("pf"+i).innerHTML = f.toFixed(2);
+
+total += f;
+
+}
+
+/* TOTAL */
+
+document.getElementById("total").innerHTML = total.toFixed(2);
+
+let maxMarks = subjectsEntered * 100;
+
+let percent = 0;
+
+if(maxMarks > 0){
+percent = (total / maxMarks) * 100;
+}
+
+document.getElementById("percent").innerHTML = percent.toFixed(2)+" %";
+
+}
+
+</script>
+
+<footer>
+
+<p>© 2026 Marks Calculator | Made with ❤️ by Ravikant Sharma</p>
+
+</footer>
+
+</body>
+</html>
